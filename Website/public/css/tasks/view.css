@@ -53,9 +53,18 @@
     white-space: normal;
 }
 
-.view-read-status {
-    width: 20%;
+.view-read-under {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     text-align: center;
     margin: .7vh 0;
+    gap: 1rem;
+}
+
+.view-read-update-btn {
+    width: 100%;
+}
+
+.view-read-status {
     background-color: #107373;
 }

@@ -51,7 +51,12 @@ $todos = $statement->fetchAll(PDO::FETCH_ASSOC);
                             <div class="view-read-card-container">
                                 <p class="view-read-title"><?php echo $todo['title']; ?></p>
                                 <p class="view-read-description"><?php echo $todo['description']; ?></p>
-                                <p class="view-read-status"><?php echo $todo['status']; ?></p>
+                                <div class="view-read-under">
+                                    <p class="view-read-status"><?php echo $todo['status']; ?></p>
+                                    <form>
+                                        <button class="view-read-update-btn">Aanpassen</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
