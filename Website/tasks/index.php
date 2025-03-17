@@ -53,9 +53,7 @@ $todos = $statement->fetchAll(PDO::FETCH_ASSOC);
                                 <p class="view-read-description"><?php echo $todo['description']; ?></p>
                                 <div class="view-read-under">
                                     <p class="view-read-status"><?php echo $todo['status']; ?></p>
-                                    <form>
-                                        <button class="view-read-update-btn">Aanpassen</button>
-                                    </form>
+                                    <a href="update.php?id=<?php echo $todo['id']; ?>" class="view-read-update-btn">Aanpassen</a>
                                 </div>
                             </div>
                         </div>
