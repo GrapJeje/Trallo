@@ -4,11 +4,11 @@
 }
 
 .view-child {
-    width: 100%;
+    max-width: 40vw;
 }
 
 .view-read {
-    width: 80%;
+    max-width: 80%;
     margin: 0 auto;
     background-color: white;
     height: 100vh;
@@ -41,6 +41,7 @@
     margin: .7vh 0;
     background-color: #107373;
     padding: 0 .5vw;
+    overflow-y: auto;
 }
 
 .view-read-description {
