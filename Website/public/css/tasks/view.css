@@ -1,0 +1,70 @@
+.view-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.view-child {
+    width: 100%;
+}
+
+.view-read {
+    width: 80%;
+    margin: 0 auto;
+    background-color: white;
+    height: 100vh;
+}
+
+.view-read h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.view-read-card {
+    width: 80%;
+    margin: 0 auto;
+    background-color: aqua;
+    padding: .3vh 0;
+}
+
+.view-read-card-container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.view-read-organisatie {
+    margin-top: 2vh;
+    background-color: #107373;
+    padding: 0 0.5vw;
+}
+
+.view-read-title {
+    margin: .7vh 0;
+    background-color: #107373;
+    padding: 0 .5vw;
+}
+
+.view-read-description {
+    margin: 0.7vh 0;
+    background-color: #107373;
+    height: 8vh;
+    padding: 0 0.5vw;
+    overflow-y: auto;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.view-read-under {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    margin: .7vh 0;
+    gap: 1rem;
+}
+
+.view-read-update-btn {
+    background-color: #107373;
+}
+
+.view-read-status {
+    background-color: #107373;
+}
