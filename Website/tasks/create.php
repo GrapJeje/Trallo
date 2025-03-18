@@ -5,7 +5,7 @@
     <label for="title">Titel</label>
     <input type="text" id="title" name="title" required>
 
-    <lable for="description">Beschrijving</lable>
+    <label for="description">Beschrijving</label>
     <textarea id="description" name="description" required></textarea>
 
     <label for="section">Afdeling</label>
@@ -19,5 +19,5 @@
     <input type="hidden" name="status" value="todo">
     <input type="hidden" name="action" value="create">
 
-    <input type="submit" value="Voeg Taak toe">
+    <input type="submit" value="Voeg Taak toe" id="create">
 </form>

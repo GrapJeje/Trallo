@@ -7,6 +7,32 @@
     width: 100%;
 }
 
+.view-child h1 {
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.view-child p {
+    padding: 10px 0;
+}
+
+.view-child form {
+    display: flex;
+    flex-direction: column;
+}
+
+.view-child textarea {
+    resize: vertical;
+    max-height: 325px;
+}
+
+.view-child #create {
+    margin-top: 35px;
+    padding: 5px 10px;
+    width: 70%;
+    align-self: center;
+}
+
 .view-read {
     width: 80%;
     margin: 0 auto;
@@ -26,9 +52,19 @@
     padding: .3vh 0;
 }
 
+.view-read-card .view-read-organisatie{
+    width: 90%;
+    margin: 0 auto;
+    padding: 15px 10px;
+}
+
 .view-read-card-container {
     width: 90%;
     margin: 0 auto;
+}
+
+.view-read-card-container p{
+    padding: 15px 10px;
 }
 
 .view-read-organisatie {
@@ -46,7 +82,8 @@
 .view-read-description {
     margin: 0.7vh 0;
     background-color: #107373;
-    height: 8vh;
+    min-height: 8vh;
+    max-height: 20vh;
     padding: 0 0.5vw;
     overflow-y: auto;
     word-wrap: break-word;
