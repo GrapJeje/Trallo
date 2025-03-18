@@ -10,8 +10,8 @@
 </head>
 
 <body>
-    <?php require_once 'layout/header.php' ?>
-    <form action="backend/Controllers/loginController.php" method="POST">
+    <?php require_once '../layout/header.php' ?>
+    <form action="../backend/Controllers/loginController.php" method="POST">
         <label for="email">Email:</label>
         <input type="email" name="email" placeholder="User@mail.com" required>
         <label for="password">Password:</label>
@@ -22,7 +22,7 @@
     <?php if (isset($_GET['msg'])): ?>
         <p><?php echo $_GET['msg']; ?></p>
     <?php endif; ?>
-    <?php require_once 'layout/footer.php' ?>
+    <?php require_once '../layout/footer.php' ?>
 </body>
 
 </html>

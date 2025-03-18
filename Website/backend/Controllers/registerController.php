@@ -16,11 +16,11 @@ function redirectWithMessage($url, $message)
 }
 
 if (empty($email) || empty($password) || empty($second_password)) {
-    redirectWithMessage($base_url . "/register.php", "Vul alle velden in");
+    redirectWithMessage($base_url . "/register", "Vul alle velden in");
 }
 
 if ($password !== $second_password) {
-    redirectWithMessage($base_url . "/register.php", "Wachtwoorden komen niet overeen");
+    redirectWithMessage($base_url . "/register", "Wachtwoorden komen niet overeen");
 }
 
 $query = "SELECT id FROM users WHERE email = :email";
@@ -29,7 +29,7 @@ $statement->bindParam(':email', $email, PDO::PARAM_STR);
 $statement->execute();
 
 if ($statement->rowCount() > 0) {
-    redirectWithMessage($base_url . "/register.php", "Email is al in gebruik");
+    redirectWithMessage($base_url . "/register", "Email is al in gebruik");
 }
 
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
