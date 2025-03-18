@@ -59,8 +59,8 @@ $todos = $statement->fetchAll(PDO::FETCH_ASSOC);
                         <input type="hidden" name="action" value="update">
 
                         <div class="form-group">
-                            <label for="status-<?php echo $todo['id']; ?>">Status</label>
-                            <select id="status-<?php echo $todo['id']; ?>" name="status" required>
+                            <label for="section-<?php echo $todo['id']; ?>">Section</label>
+                            <select id="section-<?php echo $todo['id']; ?>" name="section" required>
                                 <option value="To Do" <?php echo $todo['section'] == 'section1' ? 'selected' : ''; ?>>
                                     section1
                                 </option>
