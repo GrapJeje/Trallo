@@ -1,4 +1,4 @@
-<!doctype html>
+ <!doctype html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
@@ -15,13 +15,24 @@
 <?php
 require __DIR__ . "/../backend/conn.php";
 
-global $conn;
+global $conn, $base_url;
 
-$query = "SELECT * FROM planning_board";
+if (isset($_GET['show']))
+{
+    $amount = $_GET['show'];
+}
+else
+{
+    $amount = 5;
+}
+
+$query = "SELECT * FROM planning_board ORDER BY deadline DESC LIMIT $amount";
 $statement = $conn->prepare($query);
 $statement->execute();
 
 $todos = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+$amountHandler = new AmountHandler();
 
 require_once '../layout/header.php';
 ?>
@@ -39,7 +50,7 @@ require_once '../layout/header.php';
 
                 <?php
                 // Filter todos by user_id
-                $filteredTodos = array_filter($todos, function($todo) {
+                $filteredTodos = array_filter($todos, function ($todo) {
                     return $todo['user_id'] == $_SESSION['user_id'];
                 });
 
@@ -61,6 +72,8 @@ require_once '../layout/header.php';
                         </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
+
+                <a href="<?php echo $base_url?>/tasks/?show=<?php echo $amountHandler->getNewAmount($amount); ?>">Show more</a>
             </div>
         </div>
     </div>
@@ -69,3 +82,30 @@ require_once '../layout/header.php';
 <?php require_once '../layout/footer.php'; ?>
 </body>
 </html>
+
+ <?php
+
+ class AmountHandler
+ {
+     public function getNewAmount($amount)
+     {
+         require __DIR__ . "/../backend/conn.php";
+         global $conn;
+
+         $query = "SELECT * FROM planning_board";
+         $statement = $conn->prepare($query);
+         $statement->execute();
+
+         $todos = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+         $maxAmount = count($todos);
+
+         $amount += 5;
+         if ($amount > $maxAmount) {
+             $amount = $maxAmount;
+         }
+
+         return $amount;
+     }
+ }
+ ?>
