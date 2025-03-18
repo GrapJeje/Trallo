@@ -1,17 +1,24 @@
 <?php
-global $conn, $base_url;
-session_start();
+    session_start();
 
-$action = $_POST["action"];
-$user_id = $_SESSION["user_id"];
-
-if ($action === "create")
-{
     // Bewaar form data in variabelen
+    $user_id = $_SESSION["user_id"];
     $title = $_POST["title"];
     $description = $_POST["description"];
     $section = $_POST["section"];
     $status = $_POST["status"];
+
+    // Test
+    echo $_SESSION["user_id"];
+    echo "<br>";
+    echo $title;
+    echo "<br>";
+    echo $description;
+    echo "<br>";
+    echo $section;
+    echo "<br>";
+    echo $status;
+
 
     // Voeg taak toe
     require_once "../conn.php";
@@ -27,13 +34,5 @@ if ($action === "create")
         ":description" => $description,
         ":section" => $section,
         ":status" => $status,
-    ]);
-
-    header("Location: $base_url/tasks");
-    exit();
-}
-else if ($action == "update")
-{
-    header("Location: $base_url/tasks");
-    exit();
-}
+    ])
+?>

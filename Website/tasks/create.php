@@ -17,7 +17,6 @@
 
     <!-- Status is op todo bij aanmaken -->
     <input type="hidden" name="status" value="todo">
-    <input type="hidden" name="action" value="create">
 
     <input type="submit" value="Voeg Taak toe">
 </form>
