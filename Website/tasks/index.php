@@ -12,7 +12,6 @@
 <body>
 
 <?php
-session_start();
 require __DIR__ . "/../backend/conn.php";
 
 global $conn;
@@ -22,6 +21,8 @@ $statement = $conn->prepare($query);
 $statement->execute();
 
 $todos = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+require_once '../layout/header.php';
 ?>
 
 <div class="container">
@@ -63,5 +64,7 @@ $todos = $statement->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 </div>
+
+<?php require_once '../layout/footer.php'; ?>
 </body>
 </html>
