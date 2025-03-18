@@ -8,20 +8,23 @@
 </head>
 
 <body>
-    <form action="backend/Controllers/registerController.php" method="POST">
-        <label for="email">Email:</label>
-        <input type="email" name="email" placeholder="User@mail.com" required>
-        <label for="password">Wachtwoord:</label>
-        <input type="password" name="password" placeholder="Wachtwoord" required>
-        <label for="second_password">Herhaal wachtwoord:</label>
-        <input type="password" name="second_password" placeholder="Wachtwoord" required>
-        <input type="submit" value="Register">
-    </form>
+    <?php require_once 'layout/header.php' ?>
 
-    <?php if (isset($_GET['msg'])): ?>
-        <p><?php echo $_GET['msg']; ?></p>
-    <?php endif; ?>
+    <main>
+        <form action="backend/Controllers/registerController.php" method="POST">
+            <label for="email">Email:</label>
+            <input type="email" name="email" placeholder="User@mail.com" required>
+            <label for="password">Wachtwoord:</label>
+            <input type="password" name="password" placeholder="Wachtwoord" required>
+            <label for="second_password">Herhaal wachtwoord:</label>
+            <input type="password" name="second_password" placeholder="Wachtwoord" required>
+            <input type="submit" value="Register" id="register">
+        </form>
 
+        <?php if (isset($_GET['msg'])): ?>
+            <p><?php echo $_GET['msg']; ?></p>
+        <?php endif; ?>
+    </main>
 </body>
 
 </html>
