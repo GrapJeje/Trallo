@@ -8,6 +8,7 @@
     <title>Trallo</title>
     <link rel="stylesheet" href="../public/css/main.css">
     <link rel="stylesheet" href="../public/css/tasks/view.css">
+    <link rel="stylesheet" href="../public/css/tasks/create.css">
 </head>
 <body>
 
