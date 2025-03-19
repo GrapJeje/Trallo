@@ -14,10 +14,11 @@ if ($action === "create")
     $description = $_POST["description"];
     $section = $_POST["section"];
     $status = $_POST["status"];
+    $deadline = $_POST["deadline"];
 
     // Voeg taak toe
-    $query = "INSERT INTO planning_board (user_id, title, description, section, status)
-    VALUES(:user_id, :title, :description, :section, :status)";
+    $query = "INSERT INTO planning_board (user_id, title, description, section, status, deadline)
+    VALUES(:user_id, :title, :description, :section, :status, :deadline)";
 
     $statement = $conn->prepare($query);
 
@@ -27,6 +28,7 @@ if ($action === "create")
         ":description" => $description,
         ":section" => $section,
         ":status" => $status,
+        ":deadline" => $deadline,
     ]);
 
     header("Location: $base_url/tasks");
@@ -40,8 +42,9 @@ else if ($action == "update")
     $section = $_POST["section"];
     $status = $_POST["status"];
     $id = $_POST["id"];
+    $deadline = $_POST["deadline"];
 
-    $query = "UPDATE planning_board SET title = :title, description = :description, section = :section, status = :status 
+    $query = "UPDATE planning_board SET title = :title, description = :description, section = :section, status = :status, deadline = :deadline 
                       WHERE id = :id AND user_id = :user_id";
 
     $statement = $conn->prepare($query);
@@ -53,8 +56,30 @@ else if ($action == "update")
         ":section" => $section,
         ":status" => $status,
         ":id" => $id,
+        ":deadline" => $deadline,
     ]);
 
+    header("Location: $base_url/tasks");
+    exit();
+}
+else if ($action == "delete")
+{
+    $id = $_POST["id"];
+
+    $query = "DELETE FROM planning_board WHERE id = :id AND user_id = :user_id";
+
+    $statement = $conn->prepare($query);
+
+    $statement->execute([
+        ":id" => $id,
+        ":user_id" => $user_id,
+    ]);
+
+    header("Location: $base_url/tasks");
+    exit();
+}
+else
+{
     header("Location: $base_url/tasks");
     exit();
 }

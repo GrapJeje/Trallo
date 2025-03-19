@@ -1,4 +1,4 @@
-<!doctype html>
+ <!doctype html>
 <html lang="nl">
 
 <head>
@@ -6,6 +6,7 @@
     <title>Trallo</title>
     <link rel="stylesheet" href="../public/css/tasks/view.css">
     <link rel="stylesheet" href="../public/css/main.css">
+    <link rel="stylesheet" href="../public/css/tasks/create.css">
 </head>
 
 <body>
@@ -13,16 +14,27 @@
     <?php
     require __DIR__ . "/../backend/conn.php";
 
-    global $conn;
+global $conn, $base_url;
 
-    $query = "SELECT * FROM planning_board";
-    $statement = $conn->prepare($query);
-    $statement->execute();
+if (isset($_GET['show']))
+{
+    $amount = $_GET['show'];
+}
+else
+{
+    $amount = 5;
+}
+
+$query = "SELECT * FROM planning_board ORDER BY deadline DESC LIMIT $amount";
+$statement = $conn->prepare($query);
+$statement->execute();
 
     $todos = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    require_once '../layout/header.php';
-    ?>
+$amountHandler = new AmountHandler();
+
+require_once '../layout/header.php';
+?>
 
     <div class="container">
         <div class="view-container">
@@ -35,11 +47,11 @@
                 <div class="view-read">
                     <h1>Taken</h1>
 
-                    <?php
-                    // Filter todos by user_id
-                    $filteredTodos = array_filter($todos, function ($todo) {
-                        return $todo['user_id'] == $_SESSION['user_id'];
-                    });
+                <?php
+                // Filter todos by user_id
+                $filteredTodos = array_filter($todos, function ($todo) {
+                    return $todo['user_id'] == $_SESSION['user_id'];
+                });
 
                     if (empty($filteredTodos)):
                         ?>
@@ -58,14 +70,42 @@
                                     </div>
                                 </div>
                             </div>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
+                <a href="<?php echo $base_url?>/tasks/?show=<?php echo $amountHandler->getNewAmount($amount); ?>">Show more</a>
             </div>
         </div>
     </div>
 
     <?php require_once '../layout/footer.php'; ?>
 </body>
-
 </html>
+
+ <?php
+
+ class AmountHandler
+ {
+     public function getNewAmount($amount)
+     {
+         require __DIR__ . "/../backend/conn.php";
+         global $conn;
+
+         $query = "SELECT * FROM planning_board";
+         $statement = $conn->prepare($query);
+         $statement->execute();
+
+         $todos = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+         $maxAmount = count($todos);
+
+         $amount += 5;
+         if ($amount > $maxAmount) {
+             $amount = $maxAmount;
+         }
+
+         return $amount;
+     }
+ }
+ ?>

@@ -6,14 +6,15 @@ CREATE DATABASE IF NOT EXISTS `trallo` DEFAULT CHARACTER SET utf8mb4 COLLATE utf
 USE `trallo`;
 
 -- Tabel: `planning_board`
-DROP TABLE IF EXISTS `planning_board`;
 CREATE TABLE IF NOT EXISTS `planning_board` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  `section` varchar(255) NOT NULL,
-  `status` varchar(255) NOT NULL,
-   `user_id` INT NOT NULL
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `title` varchar(255) NOT NULL,
+    `description` text NOT NULL,
+    `section` varchar(255) NOT NULL,
+    `status` varchar(255) NOT NULL,
+    `deadline` date DEFAULT NULL,
+    `user_id` int NOT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Tabel: `user`

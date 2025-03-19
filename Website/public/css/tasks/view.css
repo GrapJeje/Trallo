@@ -1,10 +1,12 @@
 .view-container {
     display: grid;
     grid-template-columns: 1fr 2fr;
+    min-height: 100vh;
+    height: 100%;
 }
 
 .view-child {
-    width: 100%;
+    max-width: 40vw;
 }
 
 .view-child h1 {
@@ -36,7 +38,7 @@
 }
 
 .view-read {
-    width: 80%;
+    max-width: 80%;
     margin: 0 auto;
     background-color: white;
     height: 100vh;
@@ -79,6 +81,7 @@
     margin: .7vh 0;
     background-color: #107373;
     padding: 0 .5vw;
+    overflow-y: auto;
 }
 
 .view-read-description {

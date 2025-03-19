@@ -1,3 +1,10 @@
+<?php
+global $base_url;
+
+require_once __DIR__ . '/../backend/conn.php';
+
+?>
+
 <!doctype html>
 <html lang="nl">
 
@@ -20,6 +27,9 @@
             <input type="password" name="second_password" placeholder="Wachtwoord" required>
             <input type="submit" value="Register" id="register">
         </form>
+
+        <p>Heb je al een account? Log dan nu in!</p>
+        <a href="<?php echo $base_url ?>/login">Log in!</a>
 
         <?php if (isset($_GET['msg'])): ?>
             <p><?php echo $_GET['msg']; ?></p>
