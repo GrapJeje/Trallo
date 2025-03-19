@@ -9,16 +9,16 @@ require_once __DIR__ . '/../backend/conn.php';
 <html lang="nl">
 
 <head>
-    <?php require_once "layout/head.php"; ?>
+    <?php require_once "../layout/head.php"; ?>
     <title>Trallo | Register</title>
-    <link rel="stylesheet" href="public/css/main.css">
+    <link rel="stylesheet" href="../public/css/main.css">
 </head>
 
 <body>
-    <?php require_once 'layout/header.php' ?>
+    <?php require_once '../layout/header.php' ?>
 
     <main>
-        <form action="backend/Controllers/registerController.php" method="POST">
+        <form action="../backend/Controllers/registerController.php" method="POST">
             <label for="email">Email:</label>
             <input type="email" name="email" placeholder="User@mail.com" required>
             <label for="password">Wachtwoord:</label>
