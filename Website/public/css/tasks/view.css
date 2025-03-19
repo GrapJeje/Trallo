@@ -9,6 +9,20 @@
     max-width: 40vw;
 }
 
+.view-filter {
+    display: flex;
+    justify-content: center;
+    grid-column: span 3;
+    width: 100%;
+}
+
+.view-filter-container {
+    background-color: #8c8c8c;
+    width: 100%;
+    padding: 1vh 1vw;
+    margin: 3vh 0;
+}
+
 .view-read {
     max-width: 80%;
     margin: 0 auto;

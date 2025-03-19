@@ -1,4 +1,4 @@
- <!doctype html>
+<!doctype html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
@@ -17,12 +17,9 @@ require __DIR__ . "/../backend/conn.php";
 
 global $conn, $base_url;
 
-if (isset($_GET['show']))
-{
+if (isset($_GET['show'])) {
     $amount = $_GET['show'];
-}
-else
-{
+} else {
     $amount = 5;
 }
 
@@ -39,6 +36,12 @@ require_once '../layout/header.php';
 
 <div class="container">
     <div class="view-container">
+
+        <div class="view-filter">
+            <div class="view-filter-container">
+                <h1>Welkom <?php echo $_SESSION['user_id']; ?></h1>
+            </div>
+        </div>
 
         <div class="view-child">
             <?php require_once 'create.php'; ?>
@@ -73,7 +76,8 @@ require_once '../layout/header.php';
                     <?php endforeach; ?>
                 <?php endif; ?>
 
-                <a href="<?php echo $base_url?>/tasks/?show=<?php echo $amountHandler->getNewAmount($amount); ?>">Show more</a>
+                <a href="<?php echo $base_url ?>/tasks/?show=<?php echo $amountHandler->getNewAmount($amount); ?>">Show
+                    more</a>
             </div>
         </div>
     </div>
@@ -83,29 +87,30 @@ require_once '../layout/header.php';
 </body>
 </html>
 
- <?php
+<?php
 
- class AmountHandler
- {
-     public function getNewAmount($amount)
-     {
-         require __DIR__ . "/../backend/conn.php";
-         global $conn;
+class AmountHandler
+{
+    public function getNewAmount($amount)
+    {
+        require __DIR__ . "/../backend/conn.php";
+        global $conn;
 
-         $query = "SELECT * FROM planning_board";
-         $statement = $conn->prepare($query);
-         $statement->execute();
+        $query = "SELECT * FROM planning_board";
+        $statement = $conn->prepare($query);
+        $statement->execute();
 
-         $todos = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $todos = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-         $maxAmount = count($todos);
+        $maxAmount = count($todos);
 
-         $amount += 5;
-         if ($amount > $maxAmount) {
-             $amount = $maxAmount;
-         }
+        $amount += 5;
+        if ($amount > $maxAmount) {
+            $amount = $maxAmount;
+        }
 
-         return $amount;
-     }
- }
- ?>
+        return $amount;
+    }
+}
+
+?>
