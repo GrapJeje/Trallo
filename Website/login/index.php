@@ -2,7 +2,7 @@
 <html lang="nl">
 
 <head>
-    <?php require_once "layout/head.php"; ?>
+    <?php require_once "../layout/head.php"; ?>
     <title>Trallo | Login</title>
     <link rel="stylesheet" href="public/css/main.css">
 </head>
