@@ -5,8 +5,59 @@
     font-family: 'Arial', sans-serif;
 }
 
-.container {
+header {
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #2F80ED;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+header img{
+    width: 10%;
+}
+
+main{
+    padding: 30px;
+}
+
+main form{
+    display: flex;
+    flex-direction: column;
     width: 60%;
     margin: 0 auto;
-    background-color: red;
+}
+
+label{
+    padding: 10px 0;
+    margin-top: 15px;
+}
+
+#login, #register{
+    align-self: center;
+    padding: 5px 10px;
+    margin-top: 15px;
+    width: 30%;
+}
+
+.container {
+    padding: 25px 0 25px 25px;
+    width: 60%;
+    margin: 0 auto;
+    background-color: #27AE60;
+}
+
+footer {
+    padding: 5px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
 }
