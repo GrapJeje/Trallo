@@ -13,6 +13,11 @@ require __DIR__ . "/../backend/conn.php";
 
 global $conn, $base_url;
 
+if ($_SESSION == null) {
+    header("Location: $base_url/login?msg=U bent niet ingelogd");
+    exit;
+}
+
 $query = "SELECT * FROM planning_board";
 $statement = $conn->prepare($query);
 $statement->execute();
