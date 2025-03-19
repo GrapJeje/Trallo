@@ -17,9 +17,11 @@ require __DIR__ . "/../backend/conn.php";
 
 global $conn, $base_url;
 
-if ($_SESSION['user_id'] == null) {
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
     header("Location: $base_url/login?msg=U bent niet ingelogd");
-    exit;
+    exit();
 }
 
 if (isset($_GET['show'])) {
