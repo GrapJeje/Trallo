@@ -24,6 +24,8 @@
 .view-child textarea {
     resize: vertical;
     max-height: 325px;
+    height: 100px;
+    min-height: 60px;
 }
 
 .view-child #create {
@@ -42,14 +44,14 @@
 
 .view-read h1 {
     text-align: center;
-    margin-top: 20px;
+    padding-top: 20px;
 }
 
 .view-read-card {
     width: 80%;
     margin: 0 auto;
     background-color: aqua;
-    padding: .3vh 0;
+    padding: 15px;
 }
 
 .view-read-card .view-read-organisatie{
