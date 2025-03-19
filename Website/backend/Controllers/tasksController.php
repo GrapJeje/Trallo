@@ -62,3 +62,24 @@ else if ($action == "update")
     header("Location: $base_url/tasks");
     exit();
 }
+else if ($action == "delete")
+{
+    $id = $_POST["id"];
+
+    $query = "DELETE FROM planning_board WHERE id = :id AND user_id = :user_id";
+
+    $statement = $conn->prepare($query);
+
+    $statement->execute([
+        ":id" => $id,
+        ":user_id" => $user_id,
+    ]);
+
+    header("Location: $base_url/tasks");
+    exit();
+}
+else
+{
+    header("Location: $base_url/tasks");
+    exit();
+}
