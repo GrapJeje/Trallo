@@ -31,7 +31,8 @@ if ($action === "create")
         ":deadline" => $deadline,
     ]);
 
-    header("Location: $base_url/tasks");
+    $alert = "Taak aangemaakt!";
+    header("Location: $base_url/tasks?alert=$alert");
     exit();
 }
 else if ($action == "update")
@@ -59,7 +60,8 @@ else if ($action == "update")
         ":deadline" => $deadline,
     ]);
 
-    header("Location: $base_url/tasks");
+    $alert = "Taak bijgewerkt!";
+    header("Location: $base_url/tasks?alert=$alert");
     exit();
 }
 else if ($action == "delete")
@@ -75,7 +77,8 @@ else if ($action == "delete")
         ":user_id" => $user_id,
     ]);
 
-    header("Location: $base_url/tasks");
+    $alert = "Taak verwijderd!";
+    header("Location: $base_url/tasks?alert=$alert");
     exit();
 }
 else

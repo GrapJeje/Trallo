@@ -43,5 +43,6 @@ $userId = $conn->lastInsertId();
 $_SESSION['user_id'] = $userId;
 $_SESSION['user_email'] = $email;
 
-header("Location:" . $base_url . "/tasks/");
+$alert = "Succesvol geregistreerd!";
+header("Location:" . $base_url . "/tasks?=alert=$alert");
 exit();

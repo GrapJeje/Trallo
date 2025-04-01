@@ -62,3 +62,36 @@ footer {
     bottom: 0;
     left: 0;
 }
+
+.notification-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #f8f9fa;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    width: 20vw;
+}
+
+.notification-content {
+    color: #333;
+    font-size: 16px;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+    padding: 0 10px;
+}
+
+.close-button:hover {
+    color: #000;
+}

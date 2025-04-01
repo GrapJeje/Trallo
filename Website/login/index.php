@@ -19,7 +19,7 @@ require_once __DIR__ . '/../backend/conn.php';
 <main class="auth-main">
     <div class="auth-container">
         <div class="auth-image-container">
-            <img src="../public/img/a.png" alt="Login" class="auth-image">
+            <img src="../public/img/auth_banner.png" alt="Login" class="auth-image">
         </div>
 
         <div class="auth-form-container">

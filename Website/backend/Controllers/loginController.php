@@ -31,4 +31,5 @@ if (!$user || !password_verify($password, $user['password']))
 $_SESSION['user_id'] = $user['id'];
 $_SESSION['user_email'] = $user['email'];
 
-header("Location: $base_url/tasks/");
+$alert = "Succesvol ingelogd!";
+header("Location: $base_url/tasks?alert=$alert");
