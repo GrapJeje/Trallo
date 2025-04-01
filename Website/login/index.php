@@ -1,3 +1,8 @@
+<?php
+global $base_url;
+require_once __DIR__ . '/../backend/conn.php';
+?>
+
 <!doctype html>
 <html lang="nl">
 
@@ -9,22 +14,48 @@
 </head>
 
 <body>
+<?php require_once '../layout/header.php' ?>
 
-    <?php require_once '../layout/header.php' ?>
-    <main>
-        <form action="../backend/Controllers/loginController.php" method="POST">
-            <label for="email">Email:</label>
-            <input type="email" name="email" placeholder="User@mail.com" required>
-            <label for="password">Password:</label>
-            <input type="password" name="password" placeholder="Wachtwoord" required>
-            <input type="submit" value="login" id="login">
-        </form>
+<main class="auth-main">
+    <div class="auth-container">
+        <div class="auth-image-container">
+            <img src="../public/img/a.png" alt="Login" class="auth-image">
+        </div>
 
-        <?php if (isset($_GET['msg'])): ?>
-            <p><?php echo $_GET['msg']; ?></p>
-        <?php endif; ?>
-    </main>
-    <?php require_once '../layout/footer.php' ?>
+        <div class="auth-form-container">
+            <div class="auth-form-wrapper">
+                <h1 class="auth-title">Inloggen</h1>
+
+                <form action="../backend/Controllers/loginController.php" method="POST" class="auth-form">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" placeholder="user@voorbeeld.com" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="form-label">Wachtwoord</label>
+                        <input type="password" name="password" placeholder="••••••••" class="form-input" required>
+                    </div>
+
+                    <button type="submit" class="auth-button">Inloggen</button>
+                </form>
+
+                <div class="auth-alternative">
+                    <p>Nog geen account?</p>
+                    <a href="<?php echo $base_url ?>/register" class="auth-link">Registreren</a>
+                </div>
+
+                <?php if (isset($_GET['msg'])): ?>
+                    <div class="auth-message">
+                        <?php echo $_GET['msg']; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</main>
+
+<?php require_once '../layout/footer.php' ?>
 </body>
 
 </html>

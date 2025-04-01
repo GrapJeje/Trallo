@@ -1,8 +1,6 @@
 <?php
 global $base_url;
-
 require_once __DIR__ . '/../backend/conn.php';
-
 ?>
 
 <!doctype html>
@@ -18,35 +16,51 @@ require_once __DIR__ . '/../backend/conn.php';
 <body>
 <?php require_once '../layout/header.php' ?>
 
-<main>
-    <div class="sub-container">
-        <div class="img-container">
-            <img src="../public/img/a.png" alt="Register">
+<main class="auth-main">
+    <div class="auth-container">
+        <div class="auth-image-container">
+            <img src="../public/img/a.png" alt="Register" class="auth-image">
         </div>
 
-        <div class="form-container">
-            <form action="../backend/Controllers/registerController.php" method="POST">
-                <label for="email">Email:</label>
-                <input type="email" name="email" placeholder="User@mail.com" required>
-                <label for="password">Wachtwoord:</label>
-                <input type="password" name="password" placeholder="Wachtwoord" required>
-                <label for="second_password">Herhaal wachtwoord:</label>
-                <input type="password" name="second_password" placeholder="Wachtwoord" required>
-                <input type="submit" value="Register" id="register">
-            </form>
+        <div class="auth-form-container">
+            <div class="auth-form-wrapper">
+                <h1 class="auth-title">Account aanmaken</h1>
 
-            <p>Heb je al een account? Log dan nu in!</p>
-            <a href="<?php echo $base_url ?>/login">Log in!</a>
+                <form action="../backend/Controllers/registerController.php" method="POST" class="auth-form">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" placeholder="user@voorbeeld.com" class="form-input" required>
+                    </div>
 
-            <?php if (isset($_GET['msg'])): ?>
-                <p><?php echo $_GET['msg']; ?></p>
-            <?php endif; ?>
+                    <div class="form-group">
+                        <label for="password" class="form-label">Wachtwoord</label>
+                        <input type="password" name="password" placeholder="••••••••" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="second_password" class="form-label">Herhaal wachtwoord</label>
+                        <input type="password" name="second_password" placeholder="••••••••" class="form-input" required>
+                    </div>
+
+                    <button type="submit" class="auth-button">Registreren</button>
+                </form>
+
+                <div class="auth-alternative">
+                    <p>Heb je al een account?</p>
+                    <a href="<?php echo $base_url ?>/login" class="auth-link">Inloggen</a>
+                </div>
+
+                <?php if (isset($_GET['msg'])): ?>
+                    <div class="auth-message">
+                        <?php echo $_GET['msg']; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 </main>
 
 <?php require_once '../layout/footer.php' ?>
-
 </body>
 
 </html>
