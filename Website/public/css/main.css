@@ -63,24 +63,34 @@ footer {
     left: 0;
 }
 
+/* ======================== Notification ======================== */
+
 .notification-banner {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: -100px;
+    left: 20px;
     background-color: #f8f9fa;
-    padding: 10px 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    padding: 15px 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 1000;
     width: 20vw;
+    border-radius: 8px;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.notification-content {
-    color: #333;
-    font-size: 16px;
+.notification-banner.show {
+    top: 20px;
+    left: 20px;
+    opacity: 1;
+}
+
+.notification-banner.hide {
+    top: -100px;
+    opacity: 0;
 }
 
 .close-button {
