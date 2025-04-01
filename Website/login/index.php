@@ -5,6 +5,7 @@
     <?php require_once "../layout/head.php"; ?>
     <title>Trallo | Login</title>
     <link rel="stylesheet" href="../public/css/main.css">
+    <link rel="stylesheet" href="../public/css/auth.css">
 </head>
 
 <body>
@@ -22,8 +23,8 @@
         <?php if (isset($_GET['msg'])): ?>
             <p><?php echo $_GET['msg']; ?></p>
         <?php endif; ?>
-        <?php require_once '../layout/footer.php' ?>
     </main>
+    <?php require_once '../layout/footer.php' ?>
 </body>
 
 </html>
