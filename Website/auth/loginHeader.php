@@ -1,6 +1,8 @@
 <?php
 global $base_url;
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once __DIR__ . '/../backend/config.php';
 ?>
 
@@ -8,6 +10,6 @@ require_once __DIR__ . '/../backend/config.php';
     <?php if(isset($_SESSION['user_id'])): ?>
         <a href="<?php echo $base_url; ?>/auth/logout.php">Uitloggen</a>
     <?php else: ?>
-        <a href="<?php echo $base_url; ?>/login.php">Inloggen</a>
+        <a href="<?php echo $base_url; ?>/login">Inloggen</a>
     <?php endif; ?>
 </div>

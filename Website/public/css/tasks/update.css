@@ -1,0 +1,54 @@
+.view-update h1 {
+    text-align: center;
+}
+
+.view-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: 100vh;
+    height: 100%;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.update {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    width: 100%;
+    padding-left: 1vw;
+}
+
+.update h1 {
+    margin: 1vh 0;
+    align-self: center;
+}
+
+.update form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 400px;
+}
+
+.update-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 0.3rem;
+}
+
+input, textarea, select {
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}

@@ -9,7 +9,7 @@ $password = $_POST['password'];
 if (empty($email) || empty($password))
 {
     $msg = "Vul alle velden in";
-    header("Location: $base_url/login.php?msg=$msg");
+    header("Location: $base_url/login?msg=$msg");
     exit();
 }
 
@@ -24,7 +24,7 @@ $user = $statement->fetch(PDO::FETCH_ASSOC);
 if (!$user || !password_verify($password, $user['password']))
 {
     $msg = "Gebruikersnaam of wachtwoord is onjuist";
-    header("Location: $base_url/login.php?msg=$msg");
+    header("Location: $base_url/login?msg=$msg");
     exit();
 }
 

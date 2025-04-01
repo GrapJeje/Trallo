@@ -1,22 +1,35 @@
-<h1>Taak toevoegen</h1>
-<p>Voeg met het onderstaande formulier een nieuwe taak toe</p>
+<div class="create">
+    <h1>Taak toevoegen</h1>
+    <p>Voeg met het onderstaande formulier een nieuwe taak toe</p>
 
-<form action="../backend/Controllers/tasksController.php" method="POST">
-    <label for="title">Titel</label>
-    <input type="text" id="title" name="title" required>
+    <form action="../backend/Controllers/tasksController.php" method="POST">
+        <div class="create-form-group">
+            <label for="title">Titel</label>
+            <input type="text" id="title" name="title" required>
+        </div>
 
-    <lable for="description">Beschrijving</lable>
-    <textarea id="description" name="description" required></textarea>
+        <div class="create-form-group">
+            <label for="description">Beschrijving</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
 
-    <label for="section">Afdeling</label>
-    <select name="section" id="section">
-        <option value="section1">section1</option>
-        <option value="section2">section2</option>
-        <option value="section3">section3</option>
-    </select>
+        <div class="create-form-group">
+            <label for="section">Afdeling</label>
+            <select name="section" id="section">
+                <option value="section1">Section 1</option>
+                <option value="section2">Section 2</option>
+                <option value="section3">Section 3</option>
+            </select>
+        </div>
 
-    <!-- Status is op todo bij aanmaken -->
-    <input type="hidden" name="status" value="todo">
+        <div class="create-form-group">
+            <label for="deadline">Deadline</label>
+            <input type="date" id="deadline" name="deadline" required>
+        </div>
 
-    <input type="submit" value="Voeg Taak toe">
-</form>
+        <input type="hidden" name="status" value="todo">
+        <input type="hidden" name="action" value="create">
+
+        <input type="submit" value="Voeg Taak toe">
+    </form>
+</div>
