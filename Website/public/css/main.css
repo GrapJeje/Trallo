@@ -6,6 +6,11 @@
 
 body {
     font-family: 'Arial', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #f8f9fa;
 }
 
 header {
