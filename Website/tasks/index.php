@@ -140,6 +140,7 @@ require_once '../layout/header.php';
                                 <p class="view-read-description"><?php echo $todo['description']; ?></p>
                                 <div class="view-read-under">
                                     <p class="view-read-status"><?php echo $todo['status']; ?></p>
+                                    <p class="view-read-deadline"><?php echo $amountHandler->formatDate($todo['deadline']); ?></p>
                                     <a href="update.php?id=<?php echo $todo['id']; ?>"
                                        class="view-read-update-btn">Aanpassen</a>
                                 </div>
@@ -185,5 +186,15 @@ class AmountHandler
         }
 
         return $amount;
+    }
+
+    function formatDate($inputDate) {
+        $months = [
+            'Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni',
+            'Juli', 'Augustus', 'September', 'Oktober', 'November', 'December'
+        ];
+
+        list($year, $month, $day) = explode('-', $inputDate);
+        return (int)$day . ' ' . $months[(int)$month - 1] . ' ' . $year;
     }
 }
