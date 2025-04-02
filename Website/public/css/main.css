@@ -4,17 +4,42 @@
     box-sizing: border-box;
 }
 
+:root {
+    --primary-500: #3a86ff;
+    --primary-600: #2667cc;
+    --primary-700: #2c5282;
+    --secondary-500: #27AE60;
+    --accent-400: #ffbe0b;
+    --accent-500: #fb5607;
+    --neutral-50: #f8fafc;
+    --neutral-100: #f1f5f9;
+    --neutral-200: #e2e8f0;
+    --neutral-300: #cbd5e1;
+    --neutral-400: #94a3b8;
+    --neutral-500: #64748b;
+    --neutral-600: #475569;
+    --neutral-700: #334155;
+    --neutral-800: #1e293b;
+    --neutral-900: #0f172a;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
+    --card-bg: white;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --border-radius: 8px;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #f8f9fa;
+    background-color: var(--neutral-50);
 }
 
 header {
-    background-color: #DBE9EE;
+    background-color: var(--neutral-100);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,12 +49,12 @@ header {
 }
 
 header h1 {
-    color: #27AE60;
+    color: var(--secondary-500);
     font-size: 2.5rem;
 }
 
 header h1 span {
-    color: #2F80ED;
+    color: var(--primary-500);
 }
 
 header a {
@@ -38,19 +63,19 @@ header a {
 }
 
 .login-container a {
-    color: #27AE60;
+    color: var(--secondary-500);
 }
 
 .login-container a::after {
-    background: #27AE60;
+    background: var(--secondary-500);
 }
 
 .register-container a {
-    color: #2F80ED;
+    color: var(--primary-500);
 }
 
 .register-container a::after {
-    background: #2F80ED;
+    background: var(--primary-500);
 }
 
 .nav-container {
@@ -86,28 +111,26 @@ header img {
 }
 
 footer {
-    background-color: #DBE9EE;
+    background-color: var(--neutral-100);
     padding: 5px;
     text-align: center;
     bottom: 0;
     left: 0;
 }
 
-/* ======================== Notification ======================== */
-
 .notification-banner {
     position: fixed;
     top: -100px;
     left: 20px;
-    background-color: #f8f9fa;
+    background-color: var(--neutral-50);
     padding: 15px 25px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--card-shadow);
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 1000;
     width: 20vw;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     opacity: 0;
     transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
@@ -128,10 +151,10 @@ footer {
     border: none;
     font-size: 20px;
     cursor: pointer;
-    color: #666;
+    color: var(--neutral-500);
     padding: 0 10px;
 }
 
 .close-button:hover {
-    color: #000;
+    color: var(--neutral-900);
 }

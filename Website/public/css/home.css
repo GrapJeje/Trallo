@@ -10,10 +10,10 @@ main {
     display: flex;
     flex-direction: row;
     align-items: center;
-    background: white;
+    background: var(--card-bg);
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--card-shadow);
     max-width: 50vw;
     width: 90%;
     gap: 20px;
@@ -34,7 +34,7 @@ main {
     font-size: 18px;
     line-height: 1.6;
     margin-bottom: 5px;
-    color: #34495e;
+    color: var(--neutral-700);
 }
 
 .signup-button {
@@ -46,16 +46,16 @@ main {
     text-decoration: none;
     margin-top: 20px;
     padding: 12px 30px;
-    background-color: #007BFF;
-    border-radius: 8px;
+    background-color: var(--primary-500);
+    border-radius: var(--border-radius);
     transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 2px 5px rgba(58, 134, 255, 0.3);
     cursor: pointer;
     width: 40%;
 }
 
 .signup-button:hover {
-    background-color: #0069d9;
+    background-color: var(--primary-600);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 4px 8px rgba(58, 134, 255, 0.3);
 }
