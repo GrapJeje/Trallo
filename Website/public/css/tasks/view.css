@@ -137,10 +137,10 @@ footer {
 
 .view-read-deadline {
     display: flex;
-    flex-direction: column;
-    font-size: .7rem;
-    margin-right: auto;
-    margin-left: 60%;
+    align-items: center;
+    font-size: .9rem;
+    margin-left: auto;
+    gap: 5px;
 }
 
 .view-read-under {
@@ -154,7 +154,6 @@ footer {
 .view-read-status {
     text-align: center;
     font-weight: 600;
-    letter-spacing: 0.5px;
 }
 
 [data-status="open"] {
@@ -170,6 +169,73 @@ footer {
 [data-status="done"] {
     background-color: var(--success);
     color: white;
+}
+
+/* Header & Status */
+.view-read-header {
+    width: 100%;
+    padding: 15px 10px;
+    margin-bottom: 2vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: linear-gradient(135deg, var(--secondary-500), var(--primary-500));
+    color: white;
+    position: relative;
+}
+
+.view-read-deadline {
+    font-size: .9rem;
+    margin: 0;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.view-read-deadline-text {
+    order: 2;
+}
+
+/* Deadline warning styles */
+.deadline-warning {
+    order: 2;
+    color: var(--error);
+    font-size: 1.3em;
+    animation: pulse 1.5s infinite;
+    cursor: help;
+}
+
+.deadline-warning::after {
+    content: "Deadline verstreken!";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--error);
+    color: white;
+    padding: 5px 10px;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 10;
+    font-weight: bold;
+}
+
+.deadline-warning:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
 }
 
 /* Button Styles */

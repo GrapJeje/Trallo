@@ -136,7 +136,12 @@ require_once '../layout/header.php';
                         <div class="view-read-card">
                             <div class="view-read-header">
                                 <p class="view-read-organisatie"><?php echo $todo['section']; ?></p>
-                                <p class="view-read-deadline"><?php echo $amountHandler->formatDate($todo['deadline']); ?></p>
+                                <p class="view-read-deadline">
+                                    <span class="view-read-deadline-text"><?php echo $amountHandler->formatDate($todo['deadline']); ?></span>
+                                    <?php if (strtotime($todo['deadline']) < time()): ?>
+                                        <span class="deadline-warning" title="Deadline verstreken">❗</span>
+                                    <?php endif; ?>
+                                </p>
                             </div>
                             <div class="view-read-card-container">
                                 <p class="view-read-title"><?php echo $todo['title']; ?></p>
