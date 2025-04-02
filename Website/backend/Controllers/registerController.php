@@ -23,6 +23,10 @@ if ($password !== $second_password) {
     redirectWithMessage($base_url . "/register", "Wachtwoorden komen niet overeen");
 }
 
+if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+    redirectWithMessage($base_url . "/register", "Ongeldig emailadres");
+}
+
 $query = "SELECT id FROM users WHERE email = :email";
 $statement = $conn->prepare($query);
 $statement->bindParam(':email', $email, PDO::PARAM_STR);
