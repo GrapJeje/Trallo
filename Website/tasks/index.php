@@ -134,26 +134,36 @@ require_once '../layout/header.php';
                 <?php else:
                     foreach ($filteredTodos as $todo): ?>
                         <div class="view-read-card">
-                            <p class="view-read-organisatie"><?php echo $todo['section']; ?></p>
+                            <div class="view-read-header">
+                                <p class="view-read-organisatie"><?php echo $todo['section']; ?></p>
+                                <p class="view-read-deadline"><?php echo $amountHandler->formatDate($todo['deadline']); ?></p>
+                            </div>
                             <div class="view-read-card-container">
                                 <p class="view-read-title"><?php echo $todo['title']; ?></p>
                                 <p class="view-read-description"><?php echo $todo['description']; ?></p>
                                 <div class="view-read-under">
                                     <p class="view-read-status"><?php echo $todo['status']; ?></p>
-                                    <p class="view-read-deadline"><?php echo $amountHandler->formatDate($todo['deadline']); ?></p>
-                                    <a href="update.php?id=<?php echo $todo['id']; ?>"
-                                       class="view-read-update-btn">Aanpassen</a>
+                                    <a href="update.php?id=<?php echo $todo['id']; ?>" class="view-read-update-btn">
+                                        ✏️ Aanpassen
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                    <?php endforeach;
-                endif; ?>
+                    <?php endforeach; ?>
+                    <a href="<?php echo $base_url ?>/tasks/?show=<?php echo $amountHandler->getNewAmount($amount); ?>&name=<?php echo $title; ?>&organization=<?php echo $organization; ?>&status=<?php echo $status; ?>&deadline=<?php echo $deadline; ?>"
+                       class="show-more-btn">
+                        Show more
+                        <svg class="arrow-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                <?php endif; ?>
 
-                <a href="<?php echo $base_url ?>/tasks/?show=<?php echo $amountHandler->getNewAmount($amount); ?>&name=<?php echo $title; ?>&organization=<?php echo $organization; ?>&status=<?php echo $status; ?>&deadline=<?php echo $deadline; ?>">
-                    Show more
-                </a>
+
             </div>
         </div>
+    </div>
+</div>
 
 <?php require_once '../layout/footer.php'; ?>
 </body>
@@ -188,7 +198,8 @@ class AmountHandler
         return $amount;
     }
 
-    function formatDate($inputDate) {
+    function formatDate($inputDate)
+    {
         $months = [
             'Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni',
             'Juli', 'Augustus', 'September', 'Oktober', 'November', 'December'
