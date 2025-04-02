@@ -102,9 +102,9 @@ require_once '../layout/header.php';
 
                         <select name="deadline" class="filter-select">
                             <option value="">Deadline</option>
-                            <option value="desc" <?php echo $deadline == 'desc' ? 'selected' : ''; ?>>Oudste eerst
+                            <option value="asc" <?php echo $deadline == 'asc' ? 'selected' : ''; ?>>Oudste eerst
                             </option>
-                            <option value="asc" <?php echo $deadline == 'asc' ? 'selected' : ''; ?>>Jongste eerst
+                            <option value="desc" <?php echo $deadline == 'desc' ? 'selected' : ''; ?>>Jongste eerst
                             </option>
                         </select>
 
