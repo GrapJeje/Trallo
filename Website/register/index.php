@@ -1,6 +1,14 @@
 <?php
 global $base_url;
 require_once __DIR__ . '/../backend/conn.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (isset($_SESSION['user_id'])) {
+    header("Location: $base_url/tasks");
+    exit();
+}
 ?>
 
 <!doctype html>
