@@ -1,5 +1,5 @@
 <div class="create">
-    <h1>Taak toevoegen</h1>
+        <h1>Taak toevoegen</h1>
     <p>Voeg met het onderstaande formulier een nieuwe taak toe</p>
 
     <form action="../backend/Controllers/tasksController.php" method="POST">
