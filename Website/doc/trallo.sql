@@ -10,12 +10,14 @@ CREATE TABLE IF NOT EXISTS `planning_board` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `title` varchar(255) NOT NULL,
     `description` text NOT NULL,
-    `section` varchar(255) NOT NULL,
+    `section_id` int(11) NOT NULL,
     `status` varchar(255) NOT NULL,
     `deadline` date DEFAULT NULL,
     `user_id` int NOT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`section_id`) REFERENCES `sections`(`id`)
+    ON DELETE CASCADE ON UPDATE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Tabel: `user`
 DROP TABLE IF EXISTS `users`;
@@ -25,3 +27,18 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+-- Tabel: `sections`
+DROP TABLE IF EXISTS `sections`;
+CREATE TABLE IF NOT EXISTS `sections` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `naam` varchar(255) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `sections` (`id`, `name`) VALUES
+(1, 'Parkbeheer'),
+(2, 'Gastenservice'),
+(3, 'Horeca'),
+(4, 'Commercieel'),
+(5, 'Veiligheid');

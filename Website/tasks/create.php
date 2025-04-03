@@ -1,5 +1,15 @@
+<?php
+global $conn, $taskId;
+require __DIR__ . "/../backend/conn.php";
+
+$query = "SELECT * FROM sections";
+$statement = $conn->prepare($query);
+$statement->execute();
+$sections = $statement->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <div class="create">
-        <h1>Taak toevoegen</h1>
+    <h1>Taak toevoegen</h1>
     <p>Voeg met het onderstaande formulier een nieuwe taak toe</p>
 
     <form action="../backend/Controllers/tasksController.php" method="POST">
@@ -16,9 +26,9 @@
         <div class="create-form-group">
             <label for="section">Afdeling</label>
             <select name="section" id="section">
-                <option value="section1">Section 1</option>
-                <option value="section2">Section 2</option>
-                <option value="section3">Section 3</option>
+                <?php foreach ($sections as $section): ?>
+                    <option value="<?php echo $section['id']; ?>"><?php echo $section['name']; ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
 

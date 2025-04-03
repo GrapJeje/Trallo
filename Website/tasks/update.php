@@ -25,6 +25,11 @@ $statement = $conn->prepare($query);
 $statement->execute();
 
 $todos = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+$query = "SELECT * FROM sections";
+$statement = $conn->prepare($query);
+$statement->execute();
+$sections = $statement->fetchAll(PDO::FETCH_ASSOC);
 require_once '../layout/header.php';
 ?>
 
@@ -65,15 +70,11 @@ require_once '../layout/header.php';
                         <div class="update-form-group">
                             <label for="section-<?php echo $todo['id']; ?>">Afdeling</label>
                             <select id="section-<?php echo $todo['id']; ?>" name="section" required>
-                                <option value="To Do" <?php echo $todo['section'] == 'section1' ? 'selected' : ''; ?>>
-                                    Section 1
-                                </option>
-                                <option value="In Progress" <?php echo $todo['section'] == 'section2' ? 'selected' : ''; ?>>
-                                    Section 2
-                                </option>
-                                <option value="Done" <?php echo $todo['section'] == 'section3' ? 'selected' : ''; ?>>
-                                    Section 3
-                                </option>
+                                <?php foreach ($sections as $section): ?>
+                                    <option value="<?php echo $section['id']; ?>" <?php echo $todo['section'] == $section['id'] ? 'selected' : ''; ?>>
+                                        <?php echo $section['name']; ?>
+                                    </option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
 

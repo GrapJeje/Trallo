@@ -11,179 +11,174 @@
 
 <body>
 
-    <?php
+<?php
 
-    require __DIR__ . "/../backend/conn.php";
+require __DIR__ . "/../backend/conn.php";
 
-    global $conn, $base_url;
+global $conn, $base_url;
 
-    session_start();
+session_start();
 
-    if (!isset($_SESSION['user_id'])) {
-        header("Location: $base_url/login?msg=U bent niet ingelogd");
-        exit();
-    }
+if (!isset($_SESSION['user_id'])) {
+    header("Location: $base_url/login?msg=U bent niet ingelogd");
+    exit();
+}
 
-    if (isset($_GET['show'])) {
-        $amount = $_GET['show'];
-    } else {
-        $amount = 5;
-    }
+if (isset($_GET['show'])) {
+    $amount = $_GET['show'];
+} else {
+    $amount = 5;
+}
 
-    $title = isset($_GET['name']) ? $_GET['name'] : '';
-    $organization = isset($_GET['organization']) ? $_GET['organization'] : '';
-    $status = isset($_GET['status']) ? $_GET['status'] : '';
-    $deadline = isset($_GET['deadline']) ? $_GET['deadline'] : 'desc';
+$title = isset($_GET['name']) ? $_GET['name'] : '';
+$organization = isset($_GET['organization']) ? $_GET['organization'] : '';
+$status = isset($_GET['status']) ? $_GET['status'] : '';
+$deadline = isset($_GET['deadline']) ? $_GET['deadline'] : 'desc';
 
-    $query = "SELECT * FROM planning_board WHERE 1=1";
+$query = "SELECT * FROM planning_board WHERE 1=1";
 
-    if (!empty($title))
-        $query .= " AND title LIKE :title";
-    if (!empty($organization))
-        $query .= " AND section = :organization";
-    if (!empty($status))
-        $query .= " AND status = :status";
+if (!empty($title)) $query .= " AND title LIKE :title";
+if (!empty($organization)) $query .= " AND section = :organization";
+if (!empty($status)) $query .= " AND status = :status";
 
-    if (!empty($deadline)) {
-        if ($deadline === 'asc') {
-            $query .= " ORDER BY deadline ASC";
-        } else {
-            $query .= " ORDER BY deadline DESC";
-        }
+if (!empty($deadline)) {
+    if ($deadline === 'asc') {
+        $query .= " ORDER BY deadline ASC";
     } else {
         $query .= " ORDER BY deadline DESC";
     }
+} else {
+    $query .= " ORDER BY deadline DESC";
+}
 
-    $query .= " LIMIT :amount";
+$query .= " LIMIT :amount";
 
-    $statement = $conn->prepare($query);
+$statement = $conn->prepare($query);
 
-    if (!empty($title))
-        $statement->bindValue(':title', '%' . $title . '%');
-    if (!empty($organization))
-        $statement->bindValue(':organization', $organization);
-    if (!empty($status))
-        $statement->bindValue(':status', $status);
-    $statement->bindValue(':amount', $amount, PDO::PARAM_INT);
+if (!empty($title)) $statement->bindValue(':title', '%' . $title . '%');
+if (!empty($organization)) $statement->bindValue(':organization', $organization);
+if (!empty($status)) $statement->bindValue(':status', $status);
+$statement->bindValue(':amount', $amount, PDO::PARAM_INT);
 
-    $statement->execute();
-    $todos = $statement->fetchAll(PDO::FETCH_ASSOC);
+$statement->execute();
+$todos = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    $amountHandler = new AmountHandler();
+$query = "SELECT * FROM sections";
+$statement = $conn->prepare($query);
+$statement->execute();
+$sections = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    require_once '../layout/header.php';
-    ?>
+$amountHandler = new AmountHandler();
 
-    <div class="container">
-        <div class="view-container">
+require_once '../layout/header.php';
+?>
 
-            <div class="view-filter">
-                <div class="view-filter-container">
-                    <h1>Filter</h1>
-                    <div class="filter-bar">
-                        <form method="GET" class="filter-form">
-                            <input type="text" name="name" placeholder="Naam" class="filter-input"
-                                value="<?php echo $title; ?>">
-                            <select name="organization" class="filter-select">
-                                <option value="">Organisatie</option>
-                                <option value="section1" <?php echo $organization == 'section1' ? 'selected' : ''; ?>>
-                                    Section1
+<div class="container">
+    <div class="view-container">
+
+        <div class="view-filter">
+            <div class="view-filter-container">
+                <h1>Filter</h1>
+                <div class="filter-bar">
+                    <form method="GET" class="filter-form">
+                        <input type="text" name="name" placeholder="Naam" class="filter-input"
+                               value="<?php echo $title; ?>">
+                        <select name="organization" class="filter-select">
+                            <option value="">Organisatie</option>
+                            <?php foreach ($sections as $section): ?>
+                                <option value="<?php echo $section['id']; ?>" <?php echo $organization == $section['id'] ? 'selected' : ''; ?>>
+                                    <?php echo $section['name']; ?>
                                 </option>
-                                <option value="section2" <?php echo $organization == 'section2' ? 'selected' : ''; ?>>
-                                    Section2
-                                </option>
-                                <option value="section3" <?php echo $organization == 'section3' ? 'selected' : ''; ?>>
-                                    Section3
-                                </option>
-                            </select>
+                            <?php endforeach; ?>
+                        </select>
 
-                            <select name="status" class="filter-select">
-                                <option value="">Status</option>
-                                <option value="open" <?php echo $status == 'open' ? 'selected' : ''; ?>>Open</option>
-                                <option value="in progress" <?php echo $status == 'in progress' ? 'selected' : ''; ?>>In
-                                    progress
-                                </option>
-                                <option value="done" <?php echo $status == 'done' ? 'selected' : ''; ?>>Done</option>
-                            </select>
+                        <select name="status" class="filter-select">
+                            <option value="">Status</option>
+                            <option value="open" <?php echo $status == 'open' ? 'selected' : ''; ?>>Open</option>
+                            <option value="in progress" <?php echo $status == 'in progress' ? 'selected' : ''; ?>>In
+                                progress
+                            </option>
+                            <option value="done" <?php echo $status == 'done' ? 'selected' : ''; ?>>Done</option>
+                        </select>
 
-                            <select name="deadline" class="filter-select">
-                                <option value="">Deadline</option>
-                                <option value="asc" <?php echo $deadline == 'asc' ? 'selected' : ''; ?>>Oudste eerst
-                                </option>
-                                <option value="desc" <?php echo $deadline == 'desc' ? 'selected' : ''; ?>>Jongste eerst
-                                </option>
-                            </select>
+                        <select name="deadline" class="filter-select">
+                            <option value="">Deadline</option>
+                            <option value="asc" <?php echo $deadline == 'asc' ? 'selected' : ''; ?>>Oudste eerst
+                            </option>
+                            <option value="desc" <?php echo $deadline == 'desc' ? 'selected' : ''; ?>>Jongste eerst
+                            </option>
+                        </select>
 
-                            <button type="submit" class="filter-button">Zoeken</button>
-                            <a href="<?php echo $base_url; ?>/tasks" class="filter-reset">Reset</a>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="view-child">
-                <?php require_once 'create.php'; ?>
-            </div>
-
-            <div class="view-child">
-                <div class="view-read">
-                    <div class="title-container">
-                        <h1>Taken</h1>
-                    </div>
-
-                    <?php
-                    // Filter todos by user_id
-                    $filteredTodos = array_filter($todos, function ($todo) {
-                        return $todo['user_id'] == $_SESSION['user_id'];
-                    });
-
-                    if (empty($filteredTodos)): ?>
-                        <p>Geen taken gevonden</p>
-                    <?php else:
-                        foreach ($filteredTodos as $todo): ?>
-                            <div class="view-read-card">
-                                <div class="view-read-header">
-                                    <p class="view-read-organisatie"><?php echo $todo['section']; ?></p>
-                                    <p class="view-read-deadline">
-                                        <span
-                                            class="view-read-deadline-text"><?php echo $amountHandler->formatDate($todo['deadline']); ?></span>
-                                        <?php if (strtotime($todo['deadline']) < time()): ?>
-                                            <span class="deadline-warning" title="Deadline verstreken">❗</span>
-                                        <?php endif; ?>
-                                    </p>
-                                </div>
-                                <div class="view-read-card-container">
-                                    <p class="view-read-title"><?php echo $todo['title']; ?></p>
-                                    <p class="view-read-description"><?php echo $todo['description']; ?></p>
-                                    <div class="view-read-under">
-                                        <p class="view-read-status"><?php echo $todo['status']; ?></p>
-                                        <a href="update.php?id=<?php echo $todo['id']; ?>" class="view-read-update-btn">
-                                            ✏️ Aanpassen
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                        <a href="<?php echo $base_url ?>/tasks/?show=<?php echo $amountHandler->getNewAmount($amount); ?>&name=<?php echo $title; ?>&organization=<?php echo $organization; ?>&status=<?php echo $status; ?>&deadline=<?php echo $deadline; ?>"
-                            class="show-more-btn">
-                            Show more
-                            <svg class="arrow-icon" width="12" height="12" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </a>
-                    <?php endif; ?>
-
-
+                        <button type="submit" class="filter-button">Zoeken</button>
+                        <a href="<?php echo $base_url; ?>/tasks" class="filter-reset">Reset</a>
+                    </form>
                 </div>
             </div>
         </div>
+
+        <div class="view-child">
+            <?php require_once 'create.php'; ?>
+        </div>
+
+        <div class="view-child">
+            <div class="view-read">
+                <h1>Taken</h1>
+
+                <?php
+                // Filter todos by user_id
+                $filteredTodos = array_filter($todos, function ($todo) {
+                    return $todo['user_id'] == $_SESSION['user_id'];
+                });
+
+                if (empty($filteredTodos)): ?>
+                    <p>Geen taken gevonden</p>
+                <?php else:
+                    foreach ($filteredTodos as $todo): ?>
+                        <div class="view-read-card">
+                            <div class="view-read-header">
+                                <p class="view-read-organisatie"><?php
+                                    foreach ($sections as $section) {
+                                        if ($section['id'] == $todo['section']) {
+                                            echo $section['name'];
+                                        }
+                                    }
+                                    ?></p>
+                                <p class="view-read-deadline">
+                                    <span class="view-read-deadline-text"><?php echo $amountHandler->formatDate($todo['deadline']); ?></span>
+                                    <?php if (strtotime($todo['deadline']) < time()): ?>
+                                        <span class="deadline-warning" title="Deadline verstreken">❗</span>
+                                    <?php endif; ?>
+                                </p>
+                            </div>
+                            <div class="view-read-card-container">
+                                <p class="view-read-title"><?php echo $todo['title']; ?></p>
+                                <p class="view-read-description"><?php echo $todo['description']; ?></p>
+                                <div class="view-read-under">
+                                    <p class="view-read-status"><?php echo $todo['status']; ?></p>
+                                    <a href="update.php?id=<?php echo $todo['id']; ?>" class="view-read-update-btn">
+                                        ✏️ Aanpassen
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                    <a href="<?php echo $base_url ?>/tasks/?show=<?php echo $amountHandler->getNewAmount($amount); ?>&name=<?php echo $title; ?>&organization=<?php echo $organization; ?>&status=<?php echo $status; ?>&deadline=<?php echo $deadline; ?>"
+                       class="show-more-btn">
+                        Show more
+                        <svg class="arrow-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                <?php endif; ?>
+
+
+            </div>
+        </div>
     </div>
+</div>
 
-    <?php require_once '../layout/footer.php'; ?>
+<?php require_once '../layout/footer.php'; ?>
 </body>
-
 </html>
 
 <?php
@@ -218,21 +213,11 @@ class AmountHandler
     function formatDate($inputDate)
     {
         $months = [
-            'Januari',
-            'Februari',
-            'Maart',
-            'April',
-            'Mei',
-            'Juni',
-            'Juli',
-            'Augustus',
-            'September',
-            'Oktober',
-            'November',
-            'December'
+            'Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni',
+            'Juli', 'Augustus', 'September', 'Oktober', 'November', 'December'
         ];
 
         list($year, $month, $day) = explode('-', $inputDate);
-        return (int) $day . ' ' . $months[(int) $month - 1] . ' ' . $year;
+        return (int)$day . ' ' . $months[(int)$month - 1] . ' ' . $year;
     }
 }
