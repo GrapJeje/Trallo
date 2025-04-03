@@ -10,6 +10,7 @@
 .create h1 {
     margin: 1vh 0;
     align-self: center;
+    font-family: "Playwrite HU", cursive;
 }
 
 .create form {
@@ -36,4 +37,8 @@ input, textarea, select {
 textarea {
     resize: vertical;
     min-height: 80px;
+}
+
+.title-container h1 {
+    font-family: "Playwrite HU", cursive;
 }
