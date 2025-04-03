@@ -57,7 +57,6 @@ require_once '../layout/header.php';
                 ?>
                 <div class="update">
                     <h1>Taak bewerken</h1>
-                    <p>Wijzig de taak hieronder</p>
 
                     <form action="../backend/Controllers/tasksController.php" method="POST">
                         <input type="hidden" name="id" value="<?php echo $todo['id']; ?>">
@@ -110,17 +109,15 @@ require_once '../layout/header.php';
                                    value="<?php echo htmlspecialchars($todo['deadline']); ?>" required>
                         </div>
 
-                        <button type="submit" class="view-update-btn">Opslaan</button>
-                        <button type="button" onclick="window.location.href='<?php echo $base_url; ?>/tasks'"
-                                class="view-update-btn">Annuleren
-                        </button>
-                    </form>
-
-                    <form action="../backend/Controllers/tasksController.php" method="POST">
-                        <input type="hidden" name="action" value="delete">
-                        <input type="hidden" name="id" value="<?php echo $todo['id']; ?>">
-
-                        <button type="submit" class="view-update-btn">Verwijderen</button>
+                        <div class="button-container">
+                            <button type="submit" class="view-update-btn">Opslaan</button>
+                            <button type="button" onclick="window.location.href='<?php echo $base_url; ?>/tasks'"
+                                    class="view-update-btn">Annuleren
+                            </button>
+                            <button type="submit" formaction="../backend/Controllers/tasksController.php?action=delete"
+                                    class="view-update-btn">Verwijderen
+                            </button>
+                        </div>
                     </form>
                 </div>
                 <?php
