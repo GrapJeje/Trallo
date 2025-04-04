@@ -2,7 +2,8 @@
 <html lang="nl">
 
 <head>
-    <?php require_once "../layout/head.php"; ?>
+    <?php use Website\backend\Handelers\AmountHandler;
+    require_once "../layout/head.php"; ?>
     <title>Trallo | Taken</title>
     <link rel="stylesheet" href="../public/css/tasks/view.css">
     <link rel="stylesheet" href="../public/css/main.css">
@@ -69,6 +70,8 @@ $query = "SELECT * FROM sections";
 $statement = $conn->prepare($query);
 $statement->execute();
 $sections = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+require_once __DIR__ . '/../backend/Handelers/AmountHandler.php';
 
 $amountHandler = new AmountHandler();
 
@@ -179,44 +182,3 @@ require_once '../layout/header.php';
 <?php require_once '../layout/footer.php'; ?>
 </body>
 </html>
-
-<?php
-
-class AmountHandler
-{
-    public function getNewAmount($amount)
-    {
-        require __DIR__ . "/../backend/conn.php";
-        global $conn;
-
-        $query = "SELECT * FROM planning_board";
-        $statement = $conn->prepare($query);
-        $statement->execute();
-
-        $todos = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-        $filteredTodos = array_filter($todos, function ($todo) {
-            return $todo['user_id'] == $_SESSION['user_id'];
-        });
-
-        $maxAmount = count($filteredTodos);
-
-        $amount += 5;
-        if ($amount > $maxAmount) {
-            $amount = $maxAmount;
-        }
-
-        return $amount;
-    }
-
-    function formatDate($inputDate)
-    {
-        $months = [
-            'Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni',
-            'Juli', 'Augustus', 'September', 'Oktober', 'November', 'December'
-        ];
-
-        list($year, $month, $day) = explode('-', $inputDate);
-        return (int)$day . ' ' . $months[(int)$month - 1] . ' ' . $year;
-    }
-}
