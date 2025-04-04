@@ -304,12 +304,15 @@ footer {
     width: 100%;
 }
 
+.view-filter-container h1 {
+    font-family: "Playwrite HU", cursive;
+}
+
 .view-filter-container {
     width: 100%;
     padding: 1vh 1vw;
     margin: 3vh 0;
-    background: var(--neutral-900);
-    color: white;
+    color: black;
 }
 
 .filter-bar {
@@ -371,8 +374,7 @@ footer {
 
 /* Miscellaneous */
 .view-read {
-    max-width: 80%;
-    margin: 0 auto;
+    margin-left: 5%;
     height: 100%;
     border-radius: var(--border-radius);
 }
@@ -385,6 +387,7 @@ footer {
 .view-read h1 {
     text-align: center;
     padding-top: 20px;
+    font-family: "Playwrite HU", cursive;
 }
 
 .arrow-icon {

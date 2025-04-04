@@ -8,6 +8,8 @@
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
     border: 1px solid var(--neutral-200);
+    position: sticky;
+    top: 20px;
 }
 
 .create h1 {
