@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `planning_board` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `title` varchar(255) NOT NULL,
     `description` text NOT NULL,
-    `section_id` int(11) NOT NULL,
+    `section` int(11) NOT NULL,
     `status` varchar(255) NOT NULL,
     `deadline` date DEFAULT NULL,
     `user_id` int(11) NOT NULL,
