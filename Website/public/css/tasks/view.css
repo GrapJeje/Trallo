@@ -76,6 +76,11 @@ footer {
     padding: 15px 10px;
 }
 
+.not-found {
+    text-align: center;
+    margin-top: 1%;
+}
+
 /* Shared Card Elements */
 .view-read-title,
 .view-read-description,

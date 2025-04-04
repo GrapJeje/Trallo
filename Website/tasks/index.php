@@ -131,7 +131,7 @@ require_once '../layout/header.php';
                 });
 
                 if (empty($filteredTodos)): ?>
-                    <p>Geen taken gevonden</p>
+                    <p class="not-found">Geen taken gevonden</p>
                 <?php else:
                     foreach ($filteredTodos as $todo): ?>
                         <div class="view-read-card">
