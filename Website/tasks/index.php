@@ -2,7 +2,11 @@
 <html lang="nl">
 
 <head>
-    <?php use Website\backend\Handelers\AmountHandler;
+    <?php
+
+    require_once __DIR__ . '/../backend/Handlers/AmountHandler.php';
+    use Website\backend\Handlers\AmountHandler;
+
     require_once "../layout/head.php"; ?>
     <title>Trallo | Taken</title>
     <link rel="stylesheet" href="../public/css/tasks/view.css">
@@ -13,7 +17,6 @@
 <body>
 
 <?php
-
 require __DIR__ . "/../backend/conn.php";
 
 global $conn, $base_url;
@@ -31,10 +34,10 @@ if (isset($_GET['show'])) {
     $amount = 5;
 }
 
-$title = isset($_GET['name']) ? $_GET['name'] : '';
-$organization = isset($_GET['organization']) ? $_GET['organization'] : '';
-$status = isset($_GET['status']) ? $_GET['status'] : '';
-$deadline = isset($_GET['deadline']) ? $_GET['deadline'] : 'desc';
+$title = isset($_GET['name']) ? trim($_GET['name']) : '';
+$organization = isset($_GET['organization']) ? trim($_GET['organization']) : '';
+$status = isset($_GET['status']) ? trim($_GET['status']) : '';
+$deadline = isset($_GET['deadline']) ? trim($_GET['deadline']) : 'desc';
 
 $query = "SELECT * FROM planning_board WHERE user_id = :user_id";
 
@@ -71,8 +74,6 @@ $statement = $conn->prepare($query);
 $statement->execute();
 $sections = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-require_once __DIR__ . '/../backend/Handelers/AmountHandler.php';
-
 $amountHandler = new AmountHandler();
 
 require_once '../layout/header.php';
@@ -80,19 +81,18 @@ require_once '../layout/header.php';
 
 <div class="container">
     <div class="view-container">
-
         <div class="view-filter">
             <div class="view-filter-container">
                 <h1>Filter</h1>
                 <div class="filter-bar">
                     <form method="GET" class="filter-form">
                         <input type="text" name="name" placeholder="Naam" class="filter-input"
-                               value="<?php echo $title; ?>">
+                               value="<?php echo htmlspecialchars($title); ?>">
                         <select name="organization" class="filter-select">
                             <option value="">Organisatie</option>
                             <?php foreach ($sections as $section): ?>
                                 <option value="<?php echo $section['id']; ?>" <?php echo $organization == $section['id'] ? 'selected' : ''; ?>>
-                                    <?php echo $section['name']; ?>
+                                    <?php echo htmlspecialchars($section['name']); ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
@@ -129,8 +129,7 @@ require_once '../layout/header.php';
             <div class="view-read">
                 <h1>Taken</h1>
 
-                <?php
-                if (empty($todos)): ?>
+                <?php if (empty($todos)): ?>
                     <p class="not-found">Geen taken gevonden</p>
                 <?php else:
                     foreach ($todos as $todo): ?>
@@ -139,7 +138,7 @@ require_once '../layout/header.php';
                                 <p class="view-read-organisatie"><?php
                                     foreach ($sections as $section) {
                                         if ($section['id'] == $todo['section']) {
-                                            echo $section['name'];
+                                            echo htmlspecialchars($section['name']);
                                         }
                                     }
                                     ?></p>
@@ -151,10 +150,10 @@ require_once '../layout/header.php';
                                 </p>
                             </div>
                             <div class="view-read-card-container">
-                                <p class="view-read-title"><?php echo $todo['title']; ?></p>
-                                <p class="view-read-description"><?php echo $todo['description']; ?></p>
+                                <p class="view-read-title"><?php echo htmlspecialchars($todo['title']); ?></p>
+                                <p class="view-read-description"><?php echo htmlspecialchars($todo['description']); ?></p>
                                 <div class="view-read-under">
-                                    <p class="view-read-status"><?php echo $todo['status']; ?></p>
+                                    <p class="view-read-status"><?php echo htmlspecialchars($todo['status']); ?></p>
                                     <a href="update.php?id=<?php echo $todo['id']; ?>" class="view-read-update-btn">
                                         ✏️ Aanpassen
                                     </a>
@@ -162,8 +161,14 @@ require_once '../layout/header.php';
                             </div>
                         </div>
                     <?php endforeach;
-                    if (count($todos) > $amount): ?>
-                        <a href="<?php echo $base_url ?>/tasks/?show=<?php echo $amountHandler->getNewAmount($amount); ?>&name=<?php echo $title; ?>&organization=<?php echo $organization; ?>&status=<?php echo $status; ?>&deadline=<?php echo $deadline; ?>"
+
+                    $totalUserTodos = $amountHandler->getTotalUserTodos($_SESSION['user_id']);
+                    if (count($todos) < $totalUserTodos): ?>
+                        <a href="<?php echo $base_url ?>/tasks/?show=<?php echo $amountHandler->getNewAmount($amount, $_SESSION['user_id']); ?>
+                        &name=<?php echo $title; ?>
+                        &organization=<?php echo $organization; ?>
+                        &status=<?php echo $status; ?>
+                        &deadline=<?php echo $deadline; ?>"
                            class="show-more-btn">
                             Show more
                             <svg class="arrow-icon" width="12" height="12" viewBox="0 0 24 24" fill="none"
