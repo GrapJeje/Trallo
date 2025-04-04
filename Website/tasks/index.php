@@ -35,7 +35,7 @@ $organization = isset($_GET['organization']) ? $_GET['organization'] : '';
 $status = isset($_GET['status']) ? $_GET['status'] : '';
 $deadline = isset($_GET['deadline']) ? $_GET['deadline'] : 'desc';
 
-$query = "SELECT * FROM planning_board WHERE 1=1";
+$query = "SELECT * FROM planning_board WHERE user_id = :user_id";
 
 if (!empty($title)) $query .= " AND title LIKE :title";
 if (!empty($organization)) $query .= " AND section = :organization";
@@ -54,6 +54,8 @@ if (!empty($deadline)) {
 $query .= " LIMIT :amount";
 
 $statement = $conn->prepare($query);
+
+$statement->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
 
 if (!empty($title)) $statement->bindValue(':title', '%' . $title . '%');
 if (!empty($organization)) $statement->bindValue(':organization', $organization);
@@ -125,15 +127,10 @@ require_once '../layout/header.php';
                 <h1>Taken</h1>
 
                 <?php
-                // Filter todos by user_id
-                $filteredTodos = array_filter($todos, function ($todo) {
-                    return $todo['user_id'] == $_SESSION['user_id'];
-                });
-
-                if (empty($filteredTodos)): ?>
+                if (empty($todos)): ?>
                     <p class="not-found">Geen taken gevonden</p>
                 <?php else:
-                    foreach ($filteredTodos as $todo): ?>
+                    foreach ($todos as $todo): ?>
                         <div class="view-read-card">
                             <div class="view-read-header">
                                 <p class="view-read-organisatie"><?php
@@ -161,17 +158,19 @@ require_once '../layout/header.php';
                                 </div>
                             </div>
                         </div>
-                    <?php endforeach; ?>
-                    <a href="<?php echo $base_url ?>/tasks/?show=<?php echo $amountHandler->getNewAmount($amount); ?>&name=<?php echo $title; ?>&organization=<?php echo $organization; ?>&status=<?php echo $status; ?>&deadline=<?php echo $deadline; ?>"
-                       class="show-more-btn">
-                        Show more
-                        <svg class="arrow-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
+                    <?php endforeach;
+                    if (count($todos) > $amount): ?>
+                        <a href="<?php echo $base_url ?>/tasks/?show=<?php echo $amountHandler->getNewAmount($amount); ?>&name=<?php echo $title; ?>&organization=<?php echo $organization; ?>&status=<?php echo $status; ?>&deadline=<?php echo $deadline; ?>"
+                           class="show-more-btn">
+                            Show more
+                            <svg class="arrow-icon" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    <?php endif; ?>
                 <?php endif; ?>
-
-
             </div>
         </div>
     </div>

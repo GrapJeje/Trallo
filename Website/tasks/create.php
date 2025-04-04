@@ -37,7 +37,7 @@ $sections = $statement->fetchAll(PDO::FETCH_ASSOC);
             <input type="date" id="deadline" name="deadline" required>
         </div>
 
-        <input type="hidden" name="status" value="todo">
+        <input type="hidden" name="status" value="To Do">
         <input type="hidden" name="action" value="create">
 
         <input type="submit" value="Voeg Taak toe">
