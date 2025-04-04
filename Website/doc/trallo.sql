@@ -40,6 +40,6 @@ CREATE TABLE IF NOT EXISTS `planning_board` (
     `deadline` date DEFAULT NULL,
     `user_id` int(11) NOT NULL,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`section_id`) REFERENCES `sections`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`section`) REFERENCES `sections`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
