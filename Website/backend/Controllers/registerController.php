@@ -48,5 +48,5 @@ $_SESSION['user_id'] = $userId;
 $_SESSION['user_email'] = $email;
 
 $alert = "Succesvol geregistreerd!";
-header("Location:" . $base_url . "/tasks?=alert=$alert");
+header("Location:" . $base_url . "/tasks?alert=$alert");
 exit();
