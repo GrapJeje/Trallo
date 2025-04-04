@@ -70,7 +70,8 @@
     margin-top: 2rem;
 }
 
-.view-update-btn {
+.view-update-btn,
+.view-delete-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -100,13 +101,14 @@
     flex: 1;
 }
 
-.view-update-btn[type="submit"][formaction*="delete"] {
+.view-delete-btn {
     background: var(--error);
     color: white;
     flex: 1;
 }
 
-.view-update-btn:hover {
+.view-update-btn:hover,
+.view-delete-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     opacity: 0.9;

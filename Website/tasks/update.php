@@ -122,7 +122,7 @@
                         <form action="../backend/Controllers/tasksController.php" method="POST">
                             <input type="hidden" name="id" value="<?php echo $todo['id']; ?>">
                             <input type="hidden" name="action" value="delete">
-                            <button type="submit" class="view-update-btn">Verwijderen</button>
+                            <button type="submit" class="view-delete-btn">Verwijderen</button>
                         </form>
                     </div>
                 </div>
