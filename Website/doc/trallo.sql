@@ -5,6 +5,21 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `trallo` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `trallo`;
 
+-- Tabel: `sections`
+DROP TABLE IF EXISTS `sections`;
+CREATE TABLE IF NOT EXISTS `sections` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `naam` varchar(255) NOT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `sections` (`id`, `name`) VALUES
+(1, 'Parkbeheer'),
+(2, 'Gastenservice'),
+(3, 'Horeca'),
+(4, 'Commercieel'),
+(5, 'Veiligheid');
+
 -- Tabel: `planning_board`
 CREATE TABLE IF NOT EXISTS `planning_board` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -28,17 +43,3 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
--- Tabel: `sections`
-DROP TABLE IF EXISTS `sections`;
-CREATE TABLE IF NOT EXISTS `sections` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `naam` varchar(255) NOT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-INSERT INTO `sections` (`id`, `name`) VALUES
-(1, 'Parkbeheer'),
-(2, 'Gastenservice'),
-(3, 'Horeca'),
-(4, 'Commercieel'),
-(5, 'Veiligheid');
